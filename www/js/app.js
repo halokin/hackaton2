@@ -7,12 +7,6 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-
-
-
-
-
-
 .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -102,34 +96,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $urlRouterProvider.otherwise('/tab/home');
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.controller('MapController', function($scope, $state, $cordovaGeolocation, $http) {
+.controller('MapController', function($scope, $state, $cordovaGeolocation, $http, cameraService) {
     var options = {timeout: 10000, enableHighAccuracy: true};
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -162,7 +129,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       position: latLng
   });      
  
- 
+  
  
 
  
@@ -174,7 +141,24 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
 
     $scope.map = map;
+    
+    $scope.takePicture = function () {
+        alert("alert");
+      var options = {
+         quality : 75,
+         targetWidth: 200,
+         targetHeight: 200,
+         sourceType: 1
+      };
 
+      cameraService.getPicture(options).then(function(imageData) {
+         $scope.picture = imageData;
+         cameraService.picture = imageData;
+      }, function(err) {
+         console.log(err);
+      });
+    
+   };
 //Wait until the map is loaded
 
 })
