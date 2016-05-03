@@ -1,14 +1,15 @@
 .star>.item-content {
-    background-color: #EEE8D6 !important;
+    background-color: #B6F7A1 !important;
 }
 
 .splash {
-    background: url(../img/skyline.jpg) no-repeat center center fixed;
+    background: url(../img/openroad.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
+
 
 .branding {
     width: 50%;
@@ -18,18 +19,42 @@
     margin-top: 20px;
 }
 
+
+
+.logo2cv {
+    
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
+.miniature {
+    width: 200px;
+     margin: 0 auto;
+    text-align: center;
+    border-radius: 60px;
+    
+}
+
 body {
     cursor: url('http://ionicframework.com/img/finger.png')
 }
 
 .tagline {
-    font-size: 1.4 rem;
-    
+    font-size: 30px;
+    color: aliceblue;
+    font-weight: bold;
+    line-height: 1;    
 }
 
 .branding p{
     margin-top: 10px;
     font-size: 1rem;
+    color:chartreuse;
+    font-weight: bold;
+    
 }
 
 .item-divider{
@@ -43,6 +68,12 @@ body {
 
 .item-thumbnail-left img {
     border-radius: 10px;
+}
+
+.item h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: 417D9A;
 }
 
 .item h3 {
@@ -60,4 +91,13 @@ body {
     color: #417D9A;
     font-size: 2rem;
     font-weight: 200;
+}
+
+.scroll {
+    height: 100%;
+}
+ 
+#map {
+    width: 100%;
+    height: 100%;
 }

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -50,6 +50,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
     
+  /*  .state('tabs.list', {
+        url: '/list',
+        views: {
+            'list-tab' : {
+                templateUrl: 'templates/list.html', 
+                controller: 'ListController'
+            }
+        }
+    })*/
+
+    
+    .state('tabs.defy', {
+        url: '/defy',
+        views: {
+            'defy-tab' : {
+                templateUrl: 'templates/defy.html', 
+                controller: 'MapController'
+            }
+        }
+    })
+    
     .state('tabs.list', {
         url: '/list',
         views: {
@@ -60,7 +81,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
     
-    .state('tabs.calendar', {
+    
+   .state('tabs.calendar', {
         url: '/calendar',
         views: {
             'calendar-tab' : {
@@ -75,8 +97,47 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 
+.controller('MapController', function($scope, $state, $cordovaGeolocation) {
+    var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+ 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+ 
+  }, function(error){
+    console.log("Could not get location");
+  });
 
 
+    $scope.map = map;
+
+//Wait until the map is loaded
+google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+ 
+  var marker = new google.maps.Marker({
+      map: $scope.map,
+      animation: google.maps.Animation.DROP,
+      position: latLng
+  });      
+ 
+  var infoWindow = new google.maps.InfoWindow({
+      content: "Here I am!"
+  });
+ 
+  google.maps.event.addListener(marker, 'click', function () {
+      infoWindow.open($scope.map, marker);
+  });
+ 
+})
+})
 
 
 .controller('CalendarController', ['$scope', '$http', '$state', function ($scope, $http, $state)
@@ -139,23 +200,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
             });
 }]);
-/*.config(function ($stateProvider, $urlRouterProvider) {
 
+
+
+/*.config(function ($stateProvider, $urlRouterProvider) {
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
-
     // setup an abstract state for the tabs directive
         .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
     })
-
     // Each tab has its own nav history stack:
-
     .state('tab.dash', {
         url: '/dash',
         views: {
@@ -165,7 +225,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     })
-
     .state('tab.chats', {
             url: '/chats',
             views: {
@@ -184,7 +243,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 }
             }
         })
-
     .state('tab.account', {
         url: '/account',
         views: {
@@ -194,8 +252,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         }
     });
-
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/dash');
-
 });*/
