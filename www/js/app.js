@@ -7,6 +7,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
+
+
+
+
+
+
 .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -98,7 +104,32 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
 
 
-.controller('MapController', function($scope, $state, $cordovaGeolocation) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.controller('MapController', function($scope, $state, $cordovaGeolocation, $http) {
     var options = {timeout: 10000, enableHighAccuracy: true};
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -114,6 +145,17 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
       google.maps.event.addListenerOnce($scope.map, 'idle', function(){
  
+          $http.get('js/data.json').success(function (data) {
+              for (var i = 0; i< data.artists.length; i++){
+                  new google.maps.Marker({
+                      map: $scope.map,
+                      animation: google.maps.Animation.DROP,
+                      position: {lat: data.artists[i].lat, lng: data.artists[i].lng}
+                    });
+              }
+        
+          });
+              
   var marker = new google.maps.Marker({
       map: $scope.map,
       animation: google.maps.Animation.DROP,
