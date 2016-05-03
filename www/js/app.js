@@ -191,7 +191,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 
                 $scope.doRefresh = function() {
                 $http.get('js/data.json').success(function (data) {
-                $scope.artists = data;
+                $scope.artists = data.artists;
                 $scope.$broadcast('scroll.refreshComplete');
                                 });
                 }
