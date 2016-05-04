@@ -8,15 +8,20 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    height: 100%;
 }
 
 
 .branding {
-    width: 50%;
-    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     text-align: center;
-    max-width: 200px;
     margin-top: 10px;
+    background-image: url(/img/logo2cv.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
 }
 
 .tagline {
@@ -29,10 +34,19 @@
 
 .logo2cv {
     
-    width: 380px;
+    width: 400px;
     margin: 0 auto;
     text-align: center;
-    margin-top: 150px;
+    position: absolute; 
+    bottom: 20%;
+}
+
+.button {
+    padding: 10px;
+    position: relative;
+    top: 0px;
+    bottom: 20px;
+    text-align: center;
 }
 
 
@@ -46,6 +60,7 @@
 
 
 body {
+    height:auto;
     cursor: url('http://ionicframework.com/img/finger.png')
 }
 
@@ -126,5 +141,10 @@ body {
    
     margin-left: 275px;
     
+}
+
+.vue {
+    text-align: center;
+    width: 100%;
 }
 
