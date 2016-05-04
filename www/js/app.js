@@ -61,11 +61,11 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })*/
 
     
-    .state('tabs.defy', {
-        url: '/defy',
+    .state('tabs.locate', {
+        url: '/locate',
         views: {
-            'defy-tab' : {
-                templateUrl: 'templates/defy.html', 
+            'locate-tab' : {
+                templateUrl: 'templates/locate.html', 
                 controller: 'MapController'
             }
         }
@@ -96,9 +96,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $urlRouterProvider.otherwise('/tab/home');
 })
 
-
-
-.controller('MapController', function($scope, $state, $cordovaGeolocation) {
+.controller('MapController', function($scope, $state, $cordovaGeolocation, $http, cameraService) {
     var options = {timeout: 10000, enableHighAccuracy: true};
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -114,13 +112,24 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
       google.maps.event.addListenerOnce($scope.map, 'idle', function(){
  
+          $http.get('js/data.json').success(function (data) {
+              for (var i = 0; i< data.artists.length; i++){
+                  new google.maps.Marker({
+                      map: $scope.map,
+                      animation: google.maps.Animation.DROP,
+                      position: {lat: data.artists[i].lat, lng: data.artists[i].lng}
+                    });
+              }
+        
+          });
+              
   var marker = new google.maps.Marker({
       map: $scope.map,
       animation: google.maps.Animation.DROP,
       position: latLng
   });      
  
- 
+  
  
 
  
@@ -132,10 +141,32 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
 
     $scope.map = map;
+    
+    $scope.takePicture = function () {
+        alert("alert");
+      var options = {
+         quality : 75,
+         targetWidth: 200,
+         targetHeight: 200,
+         sourceType: 1
+      };
 
+      cameraService.getPicture(options).then(function(imageData) {
+         $scope.picture = imageData;
+         cameraService.picture = imageData;
+      }, function(err) {
+         console.log(err);
+      });
+    
+   };
 //Wait until the map is loaded
 
 })
+
+
+
+
+
 
 
 
@@ -169,9 +200,44 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 }])*/
 
 
+.controller('ListController', ['$scope', '$http', '$state', function ($scope, $http, $state)
+        {
+            $http.get('js/data.json').success(function (data) {
+                $scope.artists = data.artists;
+                $scope.whichartist=$state.params.aId;
+                ;
+                
+                $scope.onItemDelete = function(item){
+                    $scope.artists.splice($scope.artists.indexOf(item), 1);
+                }
+                
+                /*$scope.onItemDelete = function(item){
+                    $scope.splice($scope.indexOf(item), 1);
+                }*/
+                
+                $scope.doRefresh = function() {
+                $http.get('js/data.json').success(function (data) {
+                $scope.artists = data.artists;
+                $scope.$broadcast('scroll.refreshComplete');
+                                });
+                }
+                
+                
+                $scope.toggleStar = function(item) {
+                    item.star = !item.star;
+                }
+                
+                $scope.moveItem = function(item, fromIndex, toIndex){
+                    $scope.artists.splice(fromIndex, 1);
+                    $scope.artists.splice(toIndex, 0, item);
+                    
+                };
+
+            });
+}])
 
 
-
+/*
 .controller('ListController', ['$scope', '$http', '$state', function ($scope, $http, $state)
         {
             $http.get('js/data.json').success(function (data) {
@@ -203,7 +269,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
             });
 }]);
-
+*/
 
 
 /*.config(function ($stateProvider, $urlRouterProvider) {

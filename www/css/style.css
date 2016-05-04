@@ -15,39 +15,40 @@
     width: 50%;
     margin: 0 auto;
     text-align: center;
-    max-width: 300px;
-    margin-top: 20px;
-}
-
-
-
-.logo2cv {
-    
-    width: 300px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-
-
-.miniature {
-    width: 200px;
-     margin: 0 auto;
-    text-align: center;
-    border-radius: 60px;
-    
-}
-
-body {
-    cursor: url('http://ionicframework.com/img/finger.png')
+    max-width: 200px;
+    margin-top: 10px;
 }
 
 .tagline {
     font-size: 30px;
     color: aliceblue;
     font-weight: bold;
-    line-height: 1;    
+    line-height: 1;
+    margin-top: 50px;
 }
+
+.logo2cv {
+    
+    width: 380px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 150px;
+}
+
+
+
+.miniature {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 60px;
+}
+
+body {
+    cursor: url('http://ionicframework.com/img/finger.png')
+}
+
+
 
 .branding p{
     margin-top: 10px;
