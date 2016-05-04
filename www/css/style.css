@@ -148,3 +148,33 @@ body {
     width: 100%;
 }
 
+.email{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+
+.point{
+    margin-top: 150px;
+    /*margin: 0 auto;*/
+    text-align: center;
+    margin-bottom: 50px;
+    
+    
+
+}
+
+.total{
+    margin: 0 auto;
+    text-align: center;
+
+}
+.successbutton{
+    margin: 0 auto;
+    text-align: center;
+    
+
+}
+

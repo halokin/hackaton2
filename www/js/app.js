@@ -93,75 +93,52 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })
     
     
+    
+    .state('tabs.success', {
+        url: '/success',
+        views: {
+            'success-tab' : {
+                templateUrl: 'templates/success.html', 
+                controller: 'MapController'
+            }
+        }
+    })
+    
+    
+    .state('tabs.photo', {
+        url: '/photo',
+        views: {
+            'photo-tab' : {
+                templateUrl: 'templates/photo.html', 
+                
+            }
+        }
+    })
+    
+    
     $urlRouterProvider.otherwise('/tab/home');
 })
 
-.controller('MapController', function($scope, $state, $cordovaGeolocation, $http, cameraService) {
-    var options = {timeout: 10000, enableHighAccuracy: true};
- 
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
- 
+.controller('MapController', function($scope, $state, $cordovaGeolocation, $rootScope, $http, $cordovaCamera) { var options = {timeout: 10000, enableHighAccuracy: true};i
     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
- 
     var mapOptions = {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
- 
+
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      google.maps.event.addListenerOnce($scope.map, 'idle', function(){
- 
-          $http.get('js/data.json').success(function (data) {
-              for (var i = 0; i< data.artists.length; i++){
-                  new google.maps.Marker({
-                      map: $scope.map,
-                      animation: google.maps.Animation.DROP,
-                      position: {lat: data.artists[i].lat, lng: data.artists[i].lng}
-                    });
-              }
-        
-          });
-              
-  var marker = new google.maps.Marker({
-      map: $scope.map,
-      animation: google.maps.Animation.DROP,
-      position: latLng
-  });      
- 
-  
- 
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+      $http.get('js/data.json').success(function (data) {
+          for (var i = 0; i< data.artists.length; i++){
+              new google.maps.Marker({
+                  map: $scope.map,
+                  animation: google.maps.Animation.DROP,
+                  position: {lat: data.artists[i].lat, lng: data.artists[i].lng}
+                });
+          }
 
- 
-});
- 
-  }, function(error){
-    console.log("Could not get location");
-  });
-
-
-    $scope.map = map;
-    
-    $scope.takePicture = function () {
-        alert("alert");
-      var options = {
-         quality : 75,
-         targetWidth: 200,
-         targetHeight: 200,
-         sourceType: 1
-      };
-
-      cameraService.getPicture(options).then(function(imageData) {
-         $scope.picture = imageData;
-         cameraService.picture = imageData;
-      }, function(err) {
-         console.log(err);
       });
-    
-   };
-//Wait until the map is loaded
-
-})
 
 
 
