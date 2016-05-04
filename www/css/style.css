@@ -30,7 +30,6 @@
     font-weight: bold;
     line-height: 1;
     margin-top: 50px;
-    
 }
 
 .logo2cv {
@@ -41,6 +40,7 @@
     position: absolute; 
     bottom: 20%;
 }
+
 .button {
     padding: 10px;
     position: relative;
@@ -52,10 +52,12 @@
 
 .miniature {
     width: 200px;
-    margin: 0 auto;
+    margin-left: 100px;
+  margin-right: auto;
     text-align: center;
     border-radius: 60px;
 }
+
 
 body {
     height:auto;
@@ -117,6 +119,28 @@ body {
 #map {
     width: 100%;
     height: 80%;
+}
+
+#ball
+{
+	-webkit-transition: all;
+	transition: all;
+	position:absolute;
+	width:100px;
+	height:100px;
+	border-radius: 50%;
+	background: white;
+}
+
+.item-note{
+    margin-top: -200px;
+    margin-right: 15px;
+}
+
+.item-note-list{
+   
+    margin-left: 275px;
+    
 }
 
 .vue {
