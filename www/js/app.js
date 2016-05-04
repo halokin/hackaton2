@@ -61,11 +61,11 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })*/
 
     
-    .state('tabs.defy', {
-        url: '/defy',
+    .state('tabs.locate', {
+        url: '/locate',
         views: {
-            'defy-tab' : {
-                templateUrl: 'templates/defy.html', 
+            'locate-tab' : {
+                templateUrl: 'templates/locate.html', 
                 controller: 'MapController'
             }
         }
